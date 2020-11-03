@@ -244,43 +244,62 @@ window.addEventListener('DOMContentLoaded', () => {
                 margin: 0 auto;
             `;
             // form.append(statusMessage);
-            form.insertAdjacentElement('afterend',statusMessage);
+            form.insertAdjacentElement('afterend', statusMessage);
 
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php');
+            // const request = new XMLHttpRequest();
+            // request.open('POST', 'server.php');
 
             // request.setRequestHeader('Content-type', 'multipart/form-data');
-            request.setRequestHeader('Content-type', 'applicaton/json');
+            // request.setRequestHeader('Content-type', 'applicaton/json');
+
+
+
             const formData = new FormData(form);
 
             const object ={};
-            
+
             formData.forEach(function(value,key){
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object);
-            
-            request.send(json);
+            // request.send(json);
 
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
+            // request.addEventListener('load', () => {
+            //     if (request.status === 200) {
+            //         console.log(request.response);
+            //         showTanksModal(message.success);
+            //         form.reset();
+            //         statusMessage.remove();
+            //     } else {
+            //         showTanksModal(message.fail);
+            //     }
+            // });
+
+            fetch('server.php', {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'applicaton/json'
+                    },
+                    body: JSON.stringify(object)
+                })
+                .then(data => data.text())
+                .then(data => {
+                    console.log(data);
                     showTanksModal(message.success);
-                    form.reset();
                     statusMessage.remove();
-                } else {
+                }).catch(() => {
                     showTanksModal(message.fail);
-                }
-            });
+                }).finally(() => {
+                    form.reset();
+                });
 
         });
     }
 
-    function showTanksModal(message){
+    function showTanksModal(message) {
         const prevModalDialog = document.querySelector('.modal__dialog');
         prevModalDialog.classList.add('hide');
-        
+
         openModal();
 
         const thanksModal = document.createElement('div');
@@ -294,16 +313,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
         document.querySelector('.modal').append(thanksModal);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             thanksModal.remove();
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
             closeModal();
         }, 4000);
 
-    }
-    // end forms
+    }    // end forms
 
+    fetch('/db.json')
+    .then(data => data.json())
+    .then(res => console.log(res));
 
 
 }); //DOMContentLoaded
