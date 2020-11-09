@@ -1,3 +1,5 @@
+'use strict';
+
 function cards() {
     class MenuCard {
         constructor(src, alt, title, desc, price, parentElement, ...classes) {

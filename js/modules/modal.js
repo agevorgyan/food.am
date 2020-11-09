@@ -1,3 +1,4 @@
+'use strict';
 function modal() {
     // start Modal
     const modalTrigger = document.querySelectorAll('[data-modal]'),

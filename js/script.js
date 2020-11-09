@@ -2,13 +2,13 @@
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    const calculator = require('./modules/calculator');
-    const cards = require('./modules/cards');
-    const forms = require('./modules/forms');
-    const modal = require('./modules/modal');
-    const slider = require('./modules/slider');
-    const tabs = require('./modules/tabs');
-    const timer = require('./modules/timer');
+    const calculator = require('./modules/calculator'),
+          cards = require('./modules/cards'),
+          forms = require('./modules/forms'),
+          modal = require('./modules/modal'),
+          slider = require('./modules/slider'),
+          tabs = require('./modules/tabs'),
+          timer = require('./modules/timer');
 
     calculator();
     cards();

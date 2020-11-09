@@ -1,3 +1,4 @@
+'use strict';
 function forms() {
     const forms = document.querySelectorAll('form');
 

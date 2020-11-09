@@ -1,3 +1,4 @@
+'use strict';
 function timer() {
     // start Timer
 
